@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+  <h4>Cart
+        <span class="price" style="color:black">
+          <i class="fa fa-shopping-cart"></i>
+          <b>{{itc}}</b>
+        </span>
+      </h4>
+{% for i in ci %}
+    <div>
+    <div class="container">
+        <a href="{% url 'remove' i.prodt.id %}" ><i class="fa fa-trash" style='font-size:23px'></i></a>&nbsp;&nbsp;<a href="{{i.prodt.get_url}}"> <img src="{{i.prodt.img.url}}" alt="{{i.prodt.name}}" style="height:150; width:150;"> <p>{{i.prodt.name}}</a>
+        <span class="price"> - RS {{i.prodt.price}} </p><br></span>
+        <a href="{% url 'dec_cart' i.prodt.id %}" ><i class='fas fa-minus' style='font-size:13px'></i></a>&nbsp; {{i.quan}} &nbsp;<a href="{% url 'addcart' i.prodt.id %}" ><i class='fas fa-plus' style='font-size:13px'></i></a>
+        <p> Qty : {{i.quan}} </p>
+        <p>{{i.total}} RS</p>
+        <hr>
+    </div>
+  </div>
+  {% endfor %}
+  <div>
+      <span class="price" style="color:black; background-color:red; font-family:'comic sans ms';"><b>Total : {{t}} RS</b></span>
+  </div>
+  <br><br><br><br><br>
+  </body>
+</html>
+{% endblock %}
